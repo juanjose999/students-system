@@ -1,22 +1,34 @@
 package com.school.system.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.Objects;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(of = "idCurso")
 public class Curso {
-    private String idCurso;
-    private int countId = 1;
-    private String nombreCurso;
-    private String descripcionCurso;
-    private int numeroCreditos;
-    private int version;
+    private static int countId = 1;
+    private final String idCurso;
+    private final String nombreCurso;
+    private final String descripcionCurso;
+    private final int numeroCreditos;
+    private final int version;
 
     public Curso(String nombreCurso, String descripcionCurso, int numeroCreditos, int version) {
-        this.idCurso = Integer.toString(countId);
+        this.idCurso = generateId();
         this.nombreCurso = nombreCurso;
         this.descripcionCurso = descripcionCurso;
         this.numeroCreditos = numeroCreditos;
         this.version = version;
-        countId++;
+    }
+
+    private String generateId() {
+        return String.valueOf(countId++);
     }
 }
+
